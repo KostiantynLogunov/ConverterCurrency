@@ -1,0 +1,35 @@
+﻿@model  CurrencyConverter
+
+@{
+    decimal priceUAH = 0;
+    if (ViewBag.Sum != null)
+    {
+        priceUAH = Convert.ToDecimal(ViewBag.Sum);
+    }
+    else
+    {
+        priceUAH = 0;
+    }
+}
+
+    <form asp-area="" asp-controller="Home" asp-action="ConvertSum" method="post">
+        <div>
+            <input type="number" name="Sum" placeholder="@priceUAH"/>
+            <input type="submit" value="Convert" />
+        </div>
+    </form>
+
+<div>
+        Price in UAH: @priceUAH hrn;
+        <div>
+            @($"Kypc dollara: {Model.USD}. Price in dollar: {Decimal.Round( Model.ConvertToUSD(priceUAH), 2)}")
+        </div>
+
+        <div>
+            @($"Kypc euro: {Model.EUR}. Price in euro: {Decimal.Round( Model.ConvertToEUR(priceUAH), 2)}")
+        </div>
+
+        <div>
+            @($"Kypc rublia: {Model.RUB}. Price in RUB: {Decimal.Round( Model.ConvertToRUB(priceUAH), 2)}")
+        </div>
+    </div>
